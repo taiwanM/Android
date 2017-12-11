@@ -1,10 +1,12 @@
 package com.example.tmoraes.myapplication;
 
+import java.io.Serializable;
+
 /**
  * Created by tmoraes on 07/12/2017.
  */
 
-class User {
+class User implements Serializable {
     private int ID;
     private String nome;
     private String senha;

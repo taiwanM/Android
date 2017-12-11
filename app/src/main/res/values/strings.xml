@@ -5,4 +5,6 @@
     <string name="user">Usuário</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="logar">Logar</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
 </resources>
