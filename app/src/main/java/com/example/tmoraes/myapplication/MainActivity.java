@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
      EditText usuario ;
      EditText senha ;
     private static String URL = "https://taiappx.herokuapp.com/";
+    private boolean isLogon = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public void Cadastrar(View view) {
         String url = URL + "cadastrar";
 
-        String name = usuario.getText().toString();
+        final String name = usuario.getText().toString();
         String pass  = senha.getText().toString();
 
         try{
@@ -57,14 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     System.out.println(response.toString());
                     try {
-                        if(response.get("status") == "OK"){
+                        if(response.get("msg").equals("OK")){
                             //call RequestActivity
                            // user.setID(Integer.parseInt(response.getString("ID")));
                             //user.setNome(response.getString("name"));
-
-                            Intent intent = new Intent(getApplicationContext(), RequestActivity.class);
-                            intent.putExtra("Usuario", user);
-                            startActivity(intent);
+                            isLogon = true;
                         }else{
                             //mensagem error
                         }
@@ -113,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Logar(View view) {
         String url = URL + "logar";
+
         try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("email" , usuario.getText().toString());
@@ -125,14 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(JSONObject response) {
                     System.out.println(response.toString());
                     try {
-                        if(!response.getString("msg").equals(null)){
+                        if(response.getString("msg").equals("OK")){
                             //call RequestActivity
                             //user.setID(Integer.parseInt(response.getString("ID")));
                             //user.setNome(response.getString("name"));
 
-                            Intent intent = new Intent(getApplicationContext(), RequestActivity.class);
-                            intent.putExtra("Usuario", user);
-                            startActivity(intent);
+                            isLogon = true;
                         }else{
                             //mensagem error
                         }
@@ -173,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
             };
 
             Volley.newRequestQueue(this).add(jor);
+
+            if (isLogon) {
+                Intent intent = new Intent(getApplicationContext(), RequestActivity.class);
+                intent.putExtra("Usuario", usuario.getText().toString());
+                startActivity(intent);
+            }
         }
         catch (JSONException e){
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    android:background="@android:color/holo_purple"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/txtUser"
+        android:background="@layout/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="3dp"
+        android:text="Demo"
+        android:textAlignment="textStart"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtType"
+        android:background="@layout/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="3dp"
+        android:text="Demo"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:background="@layout/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingHorizontal="1dp"
+        android:paddingVertical="3dp"
+        android:text="Demo"
+        android:textAlignment="textEnd"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

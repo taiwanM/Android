@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -21,7 +22,8 @@ public class RequestActivity extends AppCompatActivity {
     private static String URL = "https://taiappx.herokuapp.com/";
     private String request;
     private String response;
-    private User user;
+    private static RequestData requestData = new RequestData();
+    private TextView txtuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,28 +31,37 @@ public class RequestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request);
 
         Intent intent = getIntent();
-        user = (User) intent.getExtras().getSerializable("Usuario");
+        Bundle b = intent.getExtras();
+        String user = b.getString("Usuario");
+        requestData.setUser(user);
+
+        txtuser = (TextView)findViewById(R.id.txtUser);
+
+        txtuser.setText(user);
+
+
     }
 
     public void set1(View view) {
-        request = "1";
-        SendRequest(request);
+        requestData.setType(1);
+
+        SendRequest();
     }
 
     public void set2(View view) {
-        request = "2";
-        SendRequest(request);
+        requestData.setType(1);
+        SendRequest();
     }
 
-    public void SendRequest(String request){
+    public void SendRequest(){
         String url = URL + "appnew";
         try{
             JSONObject jsonObject = new JSONObject();
             //jsonObject.put("ID", user.getID());
-            jsonObject.put("name", "TaiwanMade");
-            jsonObject.put("description" , "none teste");
-            jsonObject.put("type", request);
-            jsonObject.put("date" , "Amanha");
+            jsonObject.put("name", requestData.getUser());
+            //jsonObject.put("description" , "none teste");
+            jsonObject.put("type", requestData.getType());
+            //jsonObject.put("date" , "Amanha");
 
 
             final String mRequestBody = jsonObject.toString();
@@ -103,9 +114,11 @@ public class RequestActivity extends AppCompatActivity {
             };
 
             Volley.newRequestQueue(this).add(jor);
+            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+
+            startActivity(intent);
         }
         catch (JSONException e){
-
         }
     }
 }
